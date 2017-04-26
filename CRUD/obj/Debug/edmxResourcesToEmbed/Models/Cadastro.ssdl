@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CadastroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="dataNascimento" Type="date" />
+    <Property Name="dataCadastro" Type="datetime" Nullable="false" />
+    <Property Name="rg" Type="varchar" MaxLength="9" />
+    <Property Name="estado" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Telefone">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TelefonesDePessoas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idTelefone" Type="int" />
+    <Property Name="idPessoa" Type="int" />
+  </EntityType>
+  <Association Name="FK__Telefones__idPes__300424B4">
+    <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+    <End Role="TelefonesDePessoas" Type="Self.TelefonesDePessoas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TelefonesDePessoas">
+        <PropertyRef Name="idPessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Telefones__idTel__2F10007B">
+    <End Role="Telefone" Type="Self.Telefone" Multiplicity="0..1" />
+    <End Role="TelefonesDePessoas" Type="Self.TelefonesDePessoas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Telefone">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TelefonesDePessoas">
+        <PropertyRef Name="idTelefone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CadastroModelStoreContainer">
+    <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Telefone" EntityType="Self.Telefone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TelefonesDePessoas" EntityType="Self.TelefonesDePessoas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Telefones__idPes__300424B4" Association="Self.FK__Telefones__idPes__300424B4">
+      <End Role="Pessoa" EntitySet="Pessoa" />
+      <End Role="TelefonesDePessoas" EntitySet="TelefonesDePessoas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Telefones__idTel__2F10007B" Association="Self.FK__Telefones__idTel__2F10007B">
+      <End Role="Telefone" EntitySet="Telefone" />
+      <End Role="TelefonesDePessoas" EntitySet="TelefonesDePessoas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

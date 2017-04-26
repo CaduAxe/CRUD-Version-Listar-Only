@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CadastroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="dataNascimento" Type="date" />
+          <Property Name="dataCadastro" Type="datetime" Nullable="false" />
+          <Property Name="rg" Type="varchar" MaxLength="9" />
+          <Property Name="estado" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telefone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TelefonesDePessoas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTelefone" Type="int" />
+          <Property Name="idPessoa" Type="int" />
+        </EntityType>
+        <Association Name="FK__Telefones__idPes__300424B4">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="TelefonesDePessoas" Type="Self.TelefonesDePessoas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonesDePessoas">
+              <PropertyRef Name="idPessoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Telefones__idTel__2F10007B">
+          <End Role="Telefone" Type="Self.Telefone" Multiplicity="0..1" />
+          <End Role="TelefonesDePessoas" Type="Self.TelefonesDePessoas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonesDePessoas">
+              <PropertyRef Name="idTelefone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CadastroModelStoreContainer">
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telefone" EntityType="Self.Telefone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TelefonesDePessoas" EntityType="Self.TelefonesDePessoas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Telefones__idPes__300424B4" Association="Self.FK__Telefones__idPes__300424B4">
+            <End Role="Pessoa" EntitySet="Pessoa" />
+            <End Role="TelefonesDePessoas" EntitySet="TelefonesDePessoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Telefones__idTel__2F10007B" Association="Self.FK__Telefones__idTel__2F10007B">
+            <End Role="Telefone" EntitySet="Telefone" />
+            <End Role="TelefonesDePessoas" EntitySet="TelefonesDePessoas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CadastroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dataNascimento" Type="DateTime" Precision="0" />
+          <Property Name="dataCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rg" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TelefonesDePessoas" Relationship="Self.FK__Telefones__idPes__300424B4" FromRole="Pessoa" ToRole="TelefonesDePessoas" />
+        </EntityType>
+        <EntityType Name="Telefone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TelefonesDePessoas" Relationship="Self.FK__Telefones__idTel__2F10007B" FromRole="Telefone" ToRole="TelefonesDePessoas" />
+        </EntityType>
+        <EntityType Name="TelefonesDePessoa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTelefone" Type="Int32" />
+          <Property Name="idPessoa" Type="Int32" />
+          <NavigationProperty Name="Pessoa" Relationship="Self.FK__Telefones__idPes__300424B4" FromRole="TelefonesDePessoas" ToRole="Pessoa" />
+          <NavigationProperty Name="Telefone" Relationship="Self.FK__Telefones__idTel__2F10007B" FromRole="TelefonesDePessoas" ToRole="Telefone" />
+        </EntityType>
+        <Association Name="FK__Telefones__idPes__300424B4">
+          <End Role="Pessoa" Type="Self.Pessoa" Multiplicity="0..1" />
+          <End Role="TelefonesDePessoas" Type="Self.TelefonesDePessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pessoa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonesDePessoas">
+              <PropertyRef Name="idPessoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Telefones__idTel__2F10007B">
+          <End Role="Telefone" Type="Self.Telefone" Multiplicity="0..1" />
+          <End Role="TelefonesDePessoas" Type="Self.TelefonesDePessoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonesDePessoas">
+              <PropertyRef Name="idTelefone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CadastroEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pessoas" EntityType="Self.Pessoa" />
+          <EntitySet Name="Telefones" EntityType="Self.Telefone" />
+          <EntitySet Name="TelefonesDePessoas" EntityType="Self.TelefonesDePessoa" />
+          <AssociationSet Name="FK__Telefones__idPes__300424B4" Association="Self.FK__Telefones__idPes__300424B4">
+            <End Role="Pessoa" EntitySet="Pessoas" />
+            <End Role="TelefonesDePessoas" EntitySet="TelefonesDePessoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Telefones__idTel__2F10007B" Association="Self.FK__Telefones__idTel__2F10007B">
+            <End Role="Telefone" EntitySet="Telefones" />
+            <End Role="TelefonesDePessoas" EntitySet="TelefonesDePessoas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CadastroModelStoreContainer" CdmEntityContainer="CadastroEntities1">
+          <EntitySetMapping Name="Pessoas">
+            <EntityTypeMapping TypeName="CadastroModel.Pessoa">
+              <MappingFragment StoreEntitySet="Pessoa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="dataNascimento" ColumnName="dataNascimento" />
+                <ScalarProperty Name="dataCadastro" ColumnName="dataCadastro" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefones">
+            <EntityTypeMapping TypeName="CadastroModel.Telefone">
+              <MappingFragment StoreEntitySet="Telefone">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelefonesDePessoas">
+            <EntityTypeMapping TypeName="CadastroModel.TelefonesDePessoa">
+              <MappingFragment StoreEntitySet="TelefonesDePessoas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idTelefone" ColumnName="idTelefone" />
+                <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

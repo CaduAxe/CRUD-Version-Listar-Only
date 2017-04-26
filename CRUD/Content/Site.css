@@ -1,0 +1,148 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 10vh 0;
+}
+
+    body * {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+summary::-webkit-details-marker {
+    display: none
+}
+
+summary:focus {
+    outline: none;
+    .noselect
+
+{
+}
+
+}
+
+details {
+    width: 1000px;
+    border: black solid 2px;
+    text-decoration: black;
+}
+
+.dt-number,
+.dt-center,
+.dt-cpf,
+.dt-geral,
+.dt-data {
+    text-align: center;
+    height: 50px;
+}
+
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dt-center {
+    width: 450px;
+}
+
+
+.dt-cpf {
+    width: 150px;
+}
+.dt-data {
+    width: 200px;
+}
+
+
+dt {
+    display: flex;
+}
+
+td {
+    
+    padding: 0;
+}
+
+.detail-table {
+    border-top: 0;
+}
+
+.head-table {
+    background-color: black;
+    color: white;
+    font: bold 16px 'Montserrat', sans-serif;
+}
+
+.date-principal {
+    border-top: 0;
+}
+
+button {
+    border: black solid 1px;
+    background-color: black;
+    color: white;
+    width: 110px;
+    padding: 8px 0;
+    margin-bottom: 5px;
+}
+
+    button:active {
+        background-color: white;
+        color: black;
+    }
+
+    button:focus {
+        outline: none;
+    }
+
+
+.errorMessage {
+    color: red;
+}
+
+input {
+    border-radius: 3px;
+    padding: 8px;
+    border: none;
+    box-shadow: 1px 1px 1px #ccc;
+    flex-grow: 1;
+    margin: 5px;
+    width: 170px;
+}
+.sortorder:after {
+    content: '\25b2';
+    // BLACK UP-POINTING TRIANGLE
+}
+
+.sortorder.reverse:after {
+    content: '\25bc';
+    // BLACK DOWN-POINTING TRIANGLE
+}

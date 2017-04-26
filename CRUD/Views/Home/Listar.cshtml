@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Listar";
+}
+
+<h2>Listar Pessoas</h2>
+
+<div ng-controller="pessoaController as vm">
+    <table class="head-table">
+        <tr>
+            <td>
+                <button class="dt-cpf" ng-click="vm.ordenar('cpf')">
+                    CPF
+                    <span class="sortorder" ng-show="vm.orderBy === 'cpf'" ng-class={reverse:vm.reverse}>
+                    </span>
+                </button>
+            </td>
+            <td>
+                <button class=" dt-center" ng-click="vm.ordenar('nome')">
+                    Nome
+                    <span class="sortorder" ng-show="vm.orderBy === 'nome'" ng-class={reverse:vm.reverse}>
+                    </span>
+                </button>
+            </td>
+            <td>
+                <button class="dt-data" ng-click="vm.ordenar('dataNascimento')">
+                    Data de Nascimento
+                    <span class="sortorder" ng-show="vm.orderBy === 'dataNascimento'" ng-class={reverse:vm.reverse}>
+                    </span>
+                </button>
+            </td>
+            <td>
+                <button class="dt-data" ng-click=vm.ordenar('horarioCadastro')>
+                    Horário de Cadastro
+                    <span class="sortorder" ng-show="vm.orderBy === 'horarioCadastro'" ng-class={reverse:vm.reverse}>
+                    </span>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <div class="itens" ng-repeat="pessoa in vm.pessoas | orderBy : vm.orderBy : vm.reverse">
+        
+        <details class="informations">
+            <summary>
+                <table class="date-principal">
+                    <tr>
+                        <td class="dt-cpf" ng-bind="pessoa.cpf"></td>
+                        <td class=" dt-center" ng-bind="pessoa.nome"></td>
+                        <td class="dt-data">
+                            {{pessoa.dataNascimento | mydate | date:'dd/MM/yyyy'}}</td>
+                        <td class="dt-data">
+                            {{pessoa.horarioCadastro | mydate | date:'dd/MM/yyyy  HH:mm:ss'}}</td>
+                    </tr>
+                </table>
+            </summary>
+            <dl style="margin: 0;">
+                <dt>
+                    <table class="detail-table">
+                        <tbody>
+                            <tr>
+                                <td><label ng-bind="'Nome:'+pessoa.nome"></label></td>
+                            </tr>
+                            <tr>
+                                <td><label ng-bind="'CPF:'+pessoa.cpf"></label></td>
+                            </tr>
+                            <tr>
+                                <td><label ng-show={{pessoa.estado=='SC'}} ng-bind="'RG:'+pessoa.rg"></label></td>
+                            </tr>
+                            <tr>
+                                <td><label ng-bind="'Estado:'+pessoa.estado"></label></td>
+                            </tr>
+                            <tr>
+                                <td><label>Horário de Cadastro: {{pessoa.horarioCadastro | mydate | date:'dd/MM/yyyy  HH:mm:ss'}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label>Data de Nascimento: {{pessoa.dataNascimento | mydate | date:'dd/MM/yyyy'}}</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </dt>
+            </dl>
+        </details>
+    </div>
+</div>
+
+
